@@ -8,18 +8,18 @@
 
 ## 1. What went well?
 
-- 
+- Everything went well and all issues were closed
 
 ## 2. What slowed me down?
 
-- 
+- Forgot to merge my codes that I did for my skeleton branch onto my main branch (was a pain in the a@!#)
 
 ## 3. ONE thing I will do differently next sprint
 
 > One. Specific. Actionable. "Be more organised" is not actionable.
 > "Write the test before the implementation for at least one story" is.
 
-- 
+- One thing I will do differently the next sprint is be more organized and add more story point times and refine estimates
 
 ---
 
