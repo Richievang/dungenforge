@@ -27,13 +27,18 @@ what it claims to be.
 
 ### Flaw 1 — in `docs/backlog.md`
 
-**Which item:**
+**Which item:** US-1.4
 
 **What's wrong with it:**
-
 **Which INVEST letter(s) it violates, and how:**
+N: violates negotiable. Tells developer to use a Hashmap with double-locking 
+V: subjective professional code!!! Subjective to the developer
+T: no "More Professional code" is subjective
 
 **My repaired version:**
+
+Pick a real beneficiary and define in measurable terms what better code is.
+The performance of this code increases by 5%
 
 ```
 As a ...,
@@ -49,22 +54,25 @@ Acceptance Criteria
 
 ### Flaw 2 — in `docs/definition-of-done.md`
 
-**Which checkbox:**
+**Which checkbox:** "The code is well written... checkbox"
 
 **Why it can't actually be checked:**
+It is an opinion not an unambiguous check that can be verified by a machine.
 
 **My replacement, phrased so that it can be:**
+All public class has a comment that states why it exists.
+All code standards are verified, naming conventions, code blocks.
 
 ---
 
 ### Flaw 3 — in `docs/sprint-01-plan.md`
 
-**Which item:**
+**Which item:** Things might get busy this week.
 
-**Why it isn't really what the document calls it:**
+**Why it isn't really what the document calls it:** This risk can't be mitigated and is forever risk.
 
 **My repaired version, including a mitigation someone could actually act on:**
-
+Tuesday and Wednesday are unavailable, so 3 of the 8 points must be done by Monday night.
 ---
 
 ## C2 — Say what's good, and why · 9 pts
@@ -76,23 +84,32 @@ sentences.
 > nothing. "Its third criterion names an observable output — the same object reference — so
 > two people would always agree whether it passed" earns full marks.
 
-### Strong story 1: ______
+### Strong story 1: ___US-1.2___
 
 **INVEST letters it satisfies especially well:**
+Testable: All 4 acceptance criteria can be checked by a machine.
+Valuable: So that... bug can be reproduced in very valuable.
 
 **What specifically makes its acceptance criteria checkable:**
+There are no opinions in the acceptance criteria, one is a boolean yes/no check, another is a existence check or absence check. This is easily machine verified.
 
-### Strong story 2: ______
+### Strong story 2: ___US-1.1___
 
 **INVEST letters it satisfies especially well:**
+Negotiable: Fully states the need but leaves implementation up to the developer.
+Valuable: strictly names the game designer as the beneficiary.
 
 **What specifically makes its acceptance criteria checkable:**
+Acceptance criteria sets player hit points to 80, this is machine checkable.
 
-### Strong story 3: ______
+### Strong story 3: ___S0.2___
 
 **INVEST letters it satisfies especially well:**
+Small: 2 quick points and 1 workflow file
+Independent: Only repo is necessary for this US
 
 **What specifically makes its acceptance criteria checkable:**
+Easily verifiable by machine (i.e. verified with screenshots)
 
 ---
 
@@ -103,13 +120,14 @@ what you'd expect to see in the pull-request diff when this story is done, and w
 acceptance criterion each piece satisfies.
 
 | What I'd expect in the diff | Which acceptance criterion it satisfies |
-|---|---|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+|-----------------------------|-----------------------------------------|
+| config.json                 | AC1                                     |
+| config class                | AC3                                     |
+| GameWorld                   | AC2                                     |
+| Main                        | AC1                                     |
 
 **One sentence: how did the acceptance criteria help you predict the shape of the work?**
+Acceptance criteria stated a need that dictated the creation of a class or type.
 
 ---
 
@@ -130,4 +148,7 @@ up the way it did.
 
 What is one thing about the Scrum process you still don't understand after this week? A good
 question here is worth more to me than a confident wrong answer.
+
+I still don't really know the whole process of the sprint artifacts? What is it and what are the artifacts?
+and what does it mean maximize transparency of information?
 
