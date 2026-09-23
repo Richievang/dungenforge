@@ -57,4 +57,7 @@ public final class GameConfig {
     public long getSeed() {
         return(long)getDouble("seed");
     }
+
+    // TEST Method only
+    public static void resetForTest() { instance = null; }
 }
