@@ -239,4 +239,6 @@ mvn test
 
 > What can the project do now that it could not do last week?
 
+The project can now share config to any part of the game. It also got rid of the randomness and gave it
+that we can pick the randomness.
 
