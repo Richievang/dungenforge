@@ -1,0 +1,188 @@
+classDiagram
+
+%% =========================================================
+%% PACKAGE: dungeonforge.config
+%% =========================================================
+
+    namespace dungeonforge.config {
+
+class GameConfig {
+-GameConfig instance$
+-Map~String, Object~ settings
+-GameConfig()
++getInstance() GameConfig$
+-loadDefaults() void
+-loadFromClasspath(resourceName: String) void
++getInt(key: String) int
++getDouble(key: String) double
++getSeed() long
++resetForTest() void$
+}
+
+class Json {
+-String s
+-int i
+-Json(s: String)
++parseObject(text: String) Map~String, Object~$
+-ws() void
+-value() Object
+-object() Map~String, Object~
+-array() List~Object~
+-string() String
+-number() Double
+}
+
+class RandomSource {
+-RandomSource instance$
+-Random rng
+-long seed
+-RandomSource()
++getInstance() RandomSource$
++nextInt(bound: int) int
++between(lo: int, hi: int) int
++nextDouble() double
++pick(options: List~T~) T
++pick(options: T[]) T
++getSeed() long
++reseed(newSeed: long) void
++resetForTest() void$
+}
+}
+
+%% =========================================================
+%% PACKAGE: dungeonforge.core
+%% =========================================================
+
+namespace dungeonforge.core {
+
+class Entity {
+<<abstract>>
+#String name
+#int hp
+#int maxHp
+#int attackPower
+#int defense
+#Entity(name: String, maxHp: int, attackPower: int, defense: int)
++getName() String
++getHp() int
++getMaxHp() int
++getAttackPower() int
++getDefense() int
++isAlive() boolean
++takeDamage(amount: int) void
++heal(amount: int) void
++describe() String*
++toString() String
+}
+
+class Player {
+-int gold
+-int xp
++Player(name: String)
++getGold() int
++getXp() int
++addGold(g: int) void
++addXp(x: int) void
++carryCapacity() double
++describe() String
+}
+
+class Monster {
+-String species
+-int xpReward
++Monster(species: String, baseHp: int, baseAttack: int, xpReward: int)
++getSpecies() String
++getXpReward() int
++describe() String
+}
+
+class DungeonLevel {
+-int depth
+-List~Room~ rooms
++DungeonLevel(depth: int)
++getDepth() int
++getRooms() List~Room~
++addRoom(r: Room) void
+}
+
+class Room {
+-String[] FLAVORS$
+-String id
+-String flavor
+-List~Monster~ monsters
++Room(id: String)
++getId() String
++getFlavor() String
++getMonsters() List~Monster~
++addMonster(m: Monster) void
+    }
+
+class GameWorld {
+-Player player
+-List~DungeonLevel~ levels
++GameWorld(player: Player)
+-generate() void
+-spawn(depth: int) Monster
++getPlayer() Player
++getLevels() List~DungeonLevel~
++totalMonsters() int
+}
+}
+
+%% =========================================================
+%% PACKAGE: dungeonforge
+%% =========================================================
+
+namespace dungeonforge {
+
+class Main {
++String VERSION$
+-Main()
++banner() String$
++main(args: String[]) void$
+}
+}
+
+%% =========================================================
+%% INHERITANCE
+%% =========================================================
+
+Entity <|-- Player
+Entity <|-- Monster
+
+%% =========================================================
+%% DOMAIN RELATIONSHIPS
+%% =========================================================
+
+GameWorld "1" --> "1" Player : has
+
+GameWorld "1" o-- "*" DungeonLevel : contains
+DungeonLevel "1" o-- "*" Room : contains
+Room "1" o-- "*" Monster : contains
+
+%% =========================================================
+%% CONFIGURATION DEPENDENCIES
+%% =========================================================
+
+GameConfig ..> Json : uses
+
+RandomSource ..> GameConfig : gets seed
+
+Player ..> GameConfig : reads settings
+
+GameWorld ..> GameConfig : reads settings
+GameWorld ..> RandomSource : uses
+
+Room ..> RandomSource : uses
+
+Monster ..> RandomSource : uses
+
+%% =========================================================
+%% APPLICATION DEPENDENCIES
+%% =========================================================
+
+Main ..> Player : creates
+Main ..> GameWorld : creates
+Main ..> DungeonLevel : uses
+Main ..> Room : uses
+Main ..> Monster : uses
