@@ -53,10 +53,10 @@ finished.*
 **Acceptance Criteria**
 - Given a clone of the repo, when I run `mvn test`, then the build succeeds and at least one test runs.
 - Given a clone of the repo, when I run `mvn exec:java`, then a banner containing the project name is printed to standard output.
-- Given `pom.xml`, when I inspect the compiler configuration, then the release version is 21.
+- Given `../pom.xml`, when I inspect the compiler configuration, then the release version is 21.
 
 **Sub-tasks**
-- [ ] Add `pom.xml` with JUnit 5 and JDK 21
+- [ ] Add `../pom.xml` with JUnit 5 and JDK 21
 - [ ] Add `Main.java` with a banner and a version constant
 - [ ] Add `SkeletonTest.java`
 - [ ] Confirm `mvn test` is green locally
