@@ -10,6 +10,7 @@ public class ThemeRegistry {
         kits.add(new CryptThemeKit(factory));
         kits.add(new ForgeThemeKit(factory));
         kits.add(new FrostThemeKit(factory));
+        kits.add(new TheGladeThemeKit(factory));
     }
 
     public ThemeKit forDepth(int depth) {
