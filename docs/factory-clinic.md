@@ -14,19 +14,25 @@ a couple of monster blueprints in `monsters.json`, and loot.
 
 Before you start, **commit your current work** so `git diff --stat` is meaningful.
 
-| Question | Your answer |
-|---|---|
-| How many **new** files did you create? | |
-| How many **existing** files did you modify? | |
-| Which existing files? | |
-| Did `GameWorld.java` change? | |
-| Did any `RoomPopulator` subclass change? | |
-| Did `Monster`, `Room`, or `DungeonLevel` change? | |
+| Question | Your answer                                    |
+|---|------------------------------------------------|
+| How many **new** files did you create? | 1                                              |
+| How many **existing** files did you modify? | 3                                              |
+| Which existing files? | config.json, monsters.json, ThemeRegistry.java |
+| Did `GameWorld.java` change? | No                                             |
+| Did any `RoomPopulator` subclass change? | No                                             |
+| Did `Monster`, `Room`, or `DungeonLevel` change? | No                                             |
 
 **Paste the output of `git diff --stat`:**
 
-```
-
+```bash
+$ git diff --stat
+ docs/factory-clinic.md                             | 16 ++++++-------
+ .../dungeonforge/factory/TheGladeThemeKit.java     | 26 +++++++++++-----------
+ .../java/dungeonforge/factory/ThemeRegistry.java   |  1 +
+ src/main/resources/data/config.json                |  2 +-
+ src/main/resources/data/monsters.json              |  7 +++++-
+ 5 files changed, 29 insertions(+), 23 deletions(-)
 ```
 
 **In two or three sentences: what does that number tell you about the Open/Closed
@@ -42,14 +48,14 @@ know from evidence rather than from a definition?**
 For each scenario: which of the three applies? Answer **Simple Factory**, **Factory Method**,
 **Abstract Factory**, or **none of them** — and give a one-sentence reason.
 
-| # | Scenario | Which? | Why |
-|---|---|---|---|
-| 1 | One place in the code turns a monster id string into a `Monster`, so `new Monster` appears once | | |
-| 2 | A boss room, a treasure room and an ordinary room each fill themselves differently, but always in the same order: prose, then monsters, then a chest | | |
-| 3 | An ice level must contain ice monsters AND ice loot AND ice prose, never a mix | | |
-| 4 | Week 9: a weapon can be made flaming, then vampiric, then blessed, in any combination | | |
-| 5 | Week 12: save files must be written as JSON now and possibly as XML later, with matched reader and writer | | |
-| 6 | A method returns a `Player` object, built from the name typed at startup | | |
+| # | Scenario | Which?           | Why                                                                                                                                                               |
+|---|---|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1 | One place in the code turns a monster id string into a `Monster`, so `new Monster` appears once | Simple Factory   | Simple Factory puts all monster creation in one place so code only needs one new monster statement but the other classes use the factory to create monsters by ID |
+| 2 | A boss room, a treasure room and an ordinary room each fill themselves differently, but always in the same order: prose, then monsters, then a chest | Factory Method   | Each room creates its own indidviual content while the population process stays the same.                                                                         |
+| 3 | An ice level must contain ice monsters AND ice loot AND ice prose, never a mix | Abstract Factory | It creates family related objects designed to work together.                                                                                                      |
+| 4 | Week 9: a weapon can be made flaming, then vampiric, then blessed, in any combination | None             |                                                                                                                                                                   |
+| 5 | Week 12: save files must be written as JSON now and possibly as XML later, with matched reader and writer | Abstract Factory | Abstract Factory because it creates a matching family of related objects—a reader and writer for the same save-file format.                                       |
+| 6 | A method returns a `Player` object, built from the name typed at startup | None             |                                                                                                                                                                   |
 
 > Scenarios 4 and 6 are traps. One is a different pattern entirely; the other is not a pattern
 > at all. Say so if you think so — "none of them" is a correct answer to at least one row.
@@ -63,9 +69,12 @@ before it teaches Factory Method.
 define either one. Describe a change someone might ask you to make, and explain why it would
 be easy with one and awkward with the other.
 
+It makes it much easier to add new room types because each subclass can handle its own creation logic. However, a Simple
+Factory you would have to modify the central factory if you ever add something new. 
 
 ## D4 — One honest question
 
 What is still blurry about these three patterns? A specific confusion is worth more to me
 than a confident summary.
 
+In my honest opinion I have a pretty good understanding with how the patterns work so far!
