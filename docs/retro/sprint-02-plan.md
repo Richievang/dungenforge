@@ -53,7 +53,7 @@ write your own plans in Week 6, reading the diagram for ordering is the trick to
 
 ## Definition of Done
 
-`definition-of-done.md` applies unchanged.
+`../definition-of-done.md` applies unchanged.
 
 ---
 

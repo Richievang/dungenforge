@@ -1,14 +1,14 @@
 # Product Backlog — SUPPLIED
 
 > **You do not write these.** Every epic and user story below has been written for you,
-> complete with acceptance criteria and estimates, and `scripts/seed-backlog.sh` loads them
+> complete with acceptance criteria and estimates, and `../../scripts/seed-backlog.sh` loads them
 > into your GitHub Issues automatically.
 >
 > Your job in Week 2 is to **read them critically** (Lab Part C) and to **run Sprint 0**.
 > You'll write your own stories in Week 6, after you've read about fifteen of these.
 >
 > ⚠️ **One of the user stories below is deliberately defective.** Finding it and explaining
-> why is worth 12 points. See `docs/artifact-review.md`.
+> why is worth 12 points. See `artifact-review.md`.
 
 ---
 
@@ -53,10 +53,10 @@ finished.*
 **Acceptance Criteria**
 - Given a clone of the repo, when I run `mvn test`, then the build succeeds and at least one test runs.
 - Given a clone of the repo, when I run `mvn exec:java`, then a banner containing the project name is printed to standard output.
-- Given `../pom.xml`, when I inspect the compiler configuration, then the release version is 21.
+- Given `../../pom.xml`, when I inspect the compiler configuration, then the release version is 21.
 
 **Sub-tasks**
-- [ ] Add `../pom.xml` with JUnit 5 and JDK 21
+- [ ] Add `../../pom.xml` with JUnit 5 and JDK 21
 - [ ] Add `Main.java` with a banner and a version constant
 - [ ] Add `SkeletonTest.java`
 - [ ] Confirm `mvn test` is green locally
@@ -75,7 +75,7 @@ finished.*
 - Given the failing test is repaired and pushed, when the workflow re-runs, then the check reports success.
 
 **Sub-tasks**
-- [ ] Add `.github/workflows/ci.yml`
+- [ ] Add `../../.github/workflows/ci.yml`
 - [ ] Deliberately break a test and push it
 - [ ] Screenshot the red check and read the Actions log
 - [ ] Repair, push, screenshot the green check
@@ -96,7 +96,7 @@ finished.*
 
 **Sub-tasks**
 - [ ] Create the project board with five columns
-- [ ] Run `scripts/seed-backlog.sh`
+- [ ] Run `../../scripts/seed-backlog.sh`
 - [ ] Place epics and both sprints in the right columns
 - [ ] Record the WIP limit in the board description
 
@@ -188,4 +188,4 @@ finished.*
 ---
 
 > **Sprint 1 committed total: 3 + 3 + 2 + 5 = 13 points against a capacity of ~10.**
-> That is worth thinking about. See `docs/artifact-review.md`, question C4.
+> That is worth thinking about. See `artifact-review.md`, question C4.

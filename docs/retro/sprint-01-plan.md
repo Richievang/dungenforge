@@ -52,7 +52,7 @@ remembering the next time your own sprint doesn't fit.
 
 ## Definition of Done
 
-`docs/definition-of-done.md` applies unchanged. Note the box you repaired in Week 2.
+`../definition-of-done.md` applies unchanged. Note the box you repaired in Week 2.
 
 ---
 

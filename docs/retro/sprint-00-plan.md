@@ -21,8 +21,8 @@
 | Risk | Mitigation |
 |---|---|
 | Maven or JDK 21 not installed, blocking every story | Verify `mvn -v` and `java -version` first; IntelliJ bundles Maven if needed |
-| `gh` CLI authentication fails, blocking the seed | `docs/backlog.md` contains every issue for manual creation — about twenty minutes |
-| Hidden `.github/` folder not copied on macOS | Cmd+Shift+. reveals hidden files in Finder; confirm with `ls -a` |
+| `gh` CLI authentication fails, blocking the seed | `backlog.md` contains every issue for manual creation — about twenty minutes |
+| Hidden `../../.github` folder not copied on macOS | Cmd+Shift+. reveals hidden files in Finder; confirm with `ls -a` |
 
 ---
 

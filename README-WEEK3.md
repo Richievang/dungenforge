@@ -21,11 +21,11 @@ mvn -q exec:java > run2.txt
 diff run1.txt run2.txt
 ```
 
-Different every time. Save that diff — `docs/evidence.md` asks for it.
+Different every time. Save that diff — `docs/retro/evidence.md` asks for it.
 
 ## Then
 
-Pull **US-1.1** off your Sprint Backlog and follow `docs/sprint-01-plan.md`.
+Pull **US-1.1** off your Sprint Backlog and follow `docs/retro/sprint-01-plan.md`.
 
 ## Files you'll change
 

@@ -62,7 +62,7 @@ git add .gitignore && git commit -m "chore: untrack build output and ignore targ
 **What it did:**
 It shows what would happen if you were to commit a file that should have been ignored.
 
-**Why adding it to `.gitignore` alone was not enough:**
+**Why adding it to `../../.gitignore` alone was not enough:**
 it is not enough because gitignore only ignores files Git isn't already tracking. So once it is tracked it must be untracked first.
 ---
 
