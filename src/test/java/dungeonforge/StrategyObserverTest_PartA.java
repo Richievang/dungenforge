@@ -7,6 +7,7 @@ import dungeonforge.behavior.HealerStrategy;
 import dungeonforge.behavior.SkittishStrategy;
 import dungeonforge.config.GameConfig;
 import dungeonforge.config.RandomSource;
+import dungeonforge.core.Combat;
 import dungeonforge.core.Monster;
 import dungeonforge.core.Player;
 import dungeonforge.core.Room;
@@ -97,6 +98,35 @@ class StrategyObserverTest {
         assertEquals("ranged", factory.create("imp", 1).getStrategy().name());
         assertEquals("skittish", factory.create("crypt_rat", 1).getStrategy().name());
         assertEquals("aggressive", factory.create("skeleton", 1).getStrategy().name());
+    }
+
+    // ---------- US-3.2: the runtime swap ----------
+
+    /** THE moment the pattern justifies itself. */
+    @Test
+    void theSameObjectBehavesDifferentlyAfterASwap() {
+        Monster m = wounded(20, 18);
+        Player p = new Player("P");
+        Room r = new Room("r");
+
+        m.setStrategy(new AggressiveStrategy());
+        assertEquals(Action.Type.ATTACK, m.getStrategy().chooseAction(m, p, r).getType());
+
+        m.setStrategy(new SkittishStrategy());          // one line, same object
+        assertEquals(Action.Type.FLEE, m.getStrategy().chooseAction(m, p, r).getType());
+    }
+
+    @Test
+    void combatSwapsAWoundedMonsterToSkittishAndAnnouncesIt() {
+        Room room = new Room("r");
+        Monster m = new Monster("Slag Hound", 25, 3, 5);
+        m.setStrategy(new AggressiveStrategy());
+        room.addMonster(m);
+
+        new Combat().fight(new Player("P"), room, 1);
+
+        assertFalse(m.getStrategy().name() == "aggressive",
+                "a monster driven below the flee threshold should change tactics");
     }
 
     // ---------- regression ----------
