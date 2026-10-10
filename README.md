@@ -24,9 +24,9 @@ Requires **JDK 21**.
 | Thing | Where |
 |---|---|
 | Definition of Done | `docs/definition-of-done.md` *(supplied)* |
-| Product backlog | `docs/backlog.md` *(supplied)* and GitHub Issues |
-| This week's sprint | `docs/sprint-00-plan.md` *(supplied)* |
-| Next week's sprint | `docs/sprint-01-plan.md` *(supplied)* |
+| Product backlog | `docs/retro/backlog.md` *(supplied)* and GitHub Issues |
+| This week's sprint | `docs/retro/sprint-00-plan.md` *(supplied)* |
+| Next week's sprint | `docs/retro/sprint-01-plan.md` *(supplied)* |
 | Board | GitHub Projects |
 | Retrospectives | `docs/retro/` |
 | Backlog seeding | `bash scripts/seed-backlog.sh` |

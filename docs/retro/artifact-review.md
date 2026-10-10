@@ -8,9 +8,9 @@
 > is the one that will make your own stories good when you start writing them in Week 6.
 
 Read all three before answering:
-- `docs/backlog.md`
-- `docs/definition-of-done.md`
-- `docs/sprint-01-plan.md`
+- `backlog.md`
+- `../definition-of-done.md`
+- `sprint-01-plan.md`
 
 ---
 
@@ -25,7 +25,7 @@ what it claims to be.
 > **Hint for the DoD:** ask of every checkbox — *could two reasonable people disagree about
 > whether this is true?* If yes, it isn't a criterion. It's an opinion.
 
-### Flaw 1 — in `docs/backlog.md`
+### Flaw 1 — in `backlog.md`
 
 **Which item:** US-1.4
 
@@ -52,7 +52,7 @@ Acceptance Criteria
 
 ---
 
-### Flaw 2 — in `docs/definition-of-done.md`
+### Flaw 2 — in `../definition-of-done.md`
 
 **Which checkbox:** "The code is well written... checkbox"
 
@@ -65,7 +65,7 @@ All code standards are verified, naming conventions, code blocks.
 
 ---
 
-### Flaw 3 — in `docs/sprint-01-plan.md`
+### Flaw 3 — in `sprint-01-plan.md`
 
 **Which item:** Things might get busy this week.
 
@@ -77,7 +77,7 @@ Tuesday and Wednesday are unavailable, so 3 of the 8 points must be done by Mond
 
 ## C2 — Say what's good, and why · 9 pts
 
-Pick the **three strongest user stories** in `docs/backlog.md`. For each, two or three
+Pick the **three strongest user stories** in `backlog.md`. For each, two or three
 sentences.
 
 > Praise is harder than criticism, and it's where most of the learning is. "It's clear" earns
@@ -133,7 +133,7 @@ Acceptance criteria stated a need that dictated the creation of a class or type.
 
 ## C4 — The bonus catch · up to +3 bonus
 
-Once you have dealt with the bad story, something in `docs/sprint-01-plan.md` no longer adds
+Once you have dealt with the bad story, something in `sprint-01-plan.md` no longer adds
 up the way it did.
 
 **What is it:**
