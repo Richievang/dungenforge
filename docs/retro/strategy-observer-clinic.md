@@ -50,17 +50,21 @@ it.
 **Add a fourth listener.** Something simple — a `StatisticsCollector` that counts events by
 type, or a `DangerMeter` that notices when your HP drops below 25%. Subscribe it in `Main`.
 
-| Question | Your answer |
-|---|---|
-| How many **new** files? | |
-| Did `Combat.java` change? | |
-| Did `EventBus.java` change? | |
-| Did any existing listener change? | |
-| Which files changed at all? | |
+| Question | Your answer              |
+|---|--------------------------|
+| How many **new** files? | 1                        |
+| Did `Combat.java` change? | No                       |
+| Did `EventBus.java` change? | No                       |
+| Did any existing listener change? | No                       |
+| Which files changed at all? | Added 1 and changed Main |
 
 **Paste `git diff --stat`:**
 
-```
+```bash
+docs/retro/strategy-observer-clinic.md             | 25 ++++++++++++++++------
+ src/main/java/dungeonforge/Main.java               |  3 +++
+ src/main/java/dungeonforge/events/DangerMeter.java | 24 ++++++++++++++++++++-
+ 3 files changed, 44 insertions(+), 8 deletions(-)
 
 ```
 
@@ -77,6 +81,10 @@ you to edit `Combat` and the bus version does not.
 > A good answer names a specific future feature. A great answer names one from this course's
 > remaining schedule.
 
+The direct-call approach costs you flexibility and makes Combat more tightly coupled to other classes, while the bus allows those classes to communicate without Combat needing to know about each one. For example, 
+suppose someone asks to add a combat log that records every attack and displays a message whenever a monster takes damage. With direct calls, 
+I would have to edit Combat to call the new logging class whenever damage occurs. 
+With the bus, the logging class could subscribe to the appropriate combat event and handle it independently, without changing Combat.
 
 ## D3 — The swap, demonstrated · 5 pts
 
@@ -88,7 +96,18 @@ Forge Golem changes tactics: aggressive -> skittish.
 
 **Paste yours:**
 
-```
+```bash
+-- strategy highlights --
+  Skeletonflees into the darkness
+  Bone PriestmendsWight
+  Wightflees into the darkness
+  Impflees into the darkness
+  Impflees into the darkness
+  Ember Spriteflees into the darkness
+  Impflees into the darkness
+  Hoar Shadecircles, looking for an opening
+  Frost Wightflees into the darkness
+  Hoar Shadeflees into the darkness
 
 ```
 
