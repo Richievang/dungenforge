@@ -51,10 +51,6 @@ public final class GameConfig {
         return instance;
     }
 
-    public static void resetForTest() {
-
-    }
-
     /** AC4: documented defaults, so a missing or unreadable config file cannot stop the game. */
     private void loadDefaults() {
         settings.put("playerStartingHp", 60.0);
@@ -66,6 +62,7 @@ public final class GameConfig {
         settings.put("maxMonstersPerRoom", 2.0);
         settings.put("restHealPerRoom", 8.0);
         settings.put("fleeThreshold", 0.30);
+        settings.put("undoDepth", 25.0);
         settings.put("seed", 20260818.0);
     }
 
@@ -117,3 +114,4 @@ public final class GameConfig {
      */
     public static void resetForTests() { instance = null; }
 }
+

@@ -48,7 +48,7 @@ it.
 **Commit your work first**, so `git diff --stat` means something.
 
 **Add a fourth listener.** Something simple — a `StatisticsCollector` that counts events by
-type, or a `DangerMeter` that notices when your HP drops below 25%. Subscribe it in `Main`.
+type, or a `DamageMeter` that notices when your HP drops below 25%. Subscribe it in `Main`.
 
 | Question | Your answer              |
 |---|--------------------------|
