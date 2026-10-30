@@ -22,6 +22,7 @@ public class MoveCommand extends AbstractCommand {
         Room next = room().getExit(direction);
         if (next == null) {
             bus().message("There is no way " + direction + ".");
+            return false;
         }
         ctx.setCurrentRoom(next);
         Combat.restAfterRoom(player());

@@ -6,6 +6,9 @@ import java.util.Locale;
 
 public class AttackCommand extends AbstractCommand {
 
+    private Monster lastTarget;
+    private int previousTargetHp;
+    private int previousPlayerHp;
 
     public AttackCommand(GameContext ctx, String args) { super(ctx, args); }
 
@@ -18,8 +21,15 @@ public class AttackCommand extends AbstractCommand {
                     "There is nothing called  \"" + args + "\".");
             return false;
         }
+
+        lastTarget = target;
+        previousTargetHp = target.getHp();
+        previousPlayerHp = player().getHp();
+
+
         ctx.getCombat().playerStrikes(player(), target);
         return true;
+
     }
 
     private Monster findTarget() {
@@ -33,5 +43,15 @@ public class AttackCommand extends AbstractCommand {
     }
 
     @Override
-    public String getDescription() { return ("attack " + args.trim()); }
+    public String getDescription() {
+        return ("attack " + args.trim());
+    }
+
+    @Override
+    public void undo() {
+        if (lastTarget != null) {
+            lastTarget.setHp(previousTargetHp);
+            player().setHp(previousPlayerHp);
+        }
+    }
 }

@@ -88,19 +88,19 @@ why in one sentence.)*
 
 **The naive-undo failure table from Part D2 step 2:**
 
-| | HP | XP | Gold | Monster HP |
-|---|---|---|---|---|
-| Before attack | | | | |
-| After attack | | | | |
-| After naive undo | | | | |
+| | HP        | XP       | Gold       | Monster HP |
+|---|-----------|----------|------------|------------|
+| Before attack | [HP 80/80 | XP 0/20  | Gold 0/40  | HP 18/18   |
+| After attack | [HP 78/80 | XP 12/20 | Gold 30/30 | HP 8/18    |
+| After naive undo | HP 80/80  | XP 12/20 | Gold 30/30 | HP 18/18   |
 
 **The same table after `TurnSnapshot`:**
 
-| | HP | XP | Gold | Monster HP |
-|---|---|---|---|---|
-| Before attack | | | | |
-| After attack | | | | |
-| After snapshot undo | | | | |
+| | HP       | XP       | Gold       | Monster HP |
+|---|----------|----------|------------|------------|
+| Before attack | HP 80/80 | XP 0/20  | Gold 30/30 | HP 18/18   |
+| After attack | HP 80/80 | XP 12/20 | Gold 30/30 | HP 8/18    |
+| After snapshot undo | HP 80/80 | XP 0/20  | Gold 30/30 | HP 18/18   |
 
 ## 4. AFTER — US-5.3 and US-5.4
 
