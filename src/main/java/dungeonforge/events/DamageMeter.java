@@ -2,13 +2,13 @@ package dungeonforge.events;
 
 import dungeonforge.core.Player;
 
-public class DangerMeter implements GameEventListener {
+public class DamageMeter implements GameEventListener {
 
     private final EventBus bus;
     private final Player player;
     private int damageThreshold;
 
-    public DangerMeter(EventBus bus, Player player, int damageThreshold) {
+    public DamageMeter(EventBus bus, Player player, int damageThreshold) {
         this.player = player;
         this.damageThreshold = damageThreshold;
         this.bus = bus;

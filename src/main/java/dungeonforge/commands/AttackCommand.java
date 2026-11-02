@@ -1,0 +1,57 @@
+package dungeonforge.commands;
+
+import dungeonforge.core.Monster;
+
+import java.util.Locale;
+
+public class AttackCommand extends AbstractCommand {
+
+    private Monster lastTarget;
+    private int previousTargetHp;
+    private int previousPlayerHp;
+
+    public AttackCommand(GameContext ctx, String args) { super(ctx, args); }
+
+    @Override
+    protected boolean doExecute() {
+        Monster target = findTarget();
+        if (target == null) {
+            bus().message(args.isBlank() ?
+                    "There is nothing here to fight" :
+                    "There is nothing called  \"" + args + "\".");
+            return false;
+        }
+
+        lastTarget = target;
+        previousTargetHp = target.getHp();
+        previousPlayerHp = player().getHp();
+
+
+        ctx.getCombat().playerStrikes(player(), target);
+        return true;
+
+    }
+
+    private Monster findTarget() {
+        if ( args.isBlank()) return room().firstLivingIn();
+        for (Monster m : room().getMonsters()) {
+            if (m.isAlive() && m.getName().toLowerCase().contains(args.toLowerCase())) {
+                return m;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String getDescription() {
+        return ("attack " + args.trim());
+    }
+
+    @Override
+    public void undo() {
+        if (lastTarget != null) {
+            lastTarget.setHp(previousTargetHp);
+            player().setHp(previousPlayerHp);
+        }
+    }
+}

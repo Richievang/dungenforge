@@ -21,6 +21,6 @@
   "crank":        { "name": "Crank",         "hp": 19, "attack": 6, "xp": 12, "theme": "theglade", "strategy": "aggressive" },
   "bulb_monster": { "name": "Bulb Monster",  "hp": 21, "attack": 5, "xp": 11, "theme": "theglade", "strategy": "aggressive" },
   "beetle_blade": { "name": "Beetle Blade",  "hp": 12, "attack": 7, "xp": 14, "theme": "theglade", "strategy": "ranged" },
-  "griever":      { "name": "Griever Tyrant",       "hp": 50, "attack": 11, "xp": 52, "theme": "theglade", "boss": true, "strategy": "aggressive" }
+  "griever":      { "name": "Griever Tyrant",  "hp": 50, "attack": 11, "xp": 52, "theme": "theglade", "boss": true, "strategy": "aggressive" }
 }
 

@@ -20,7 +20,7 @@ public class FactoryTest {
 
     @BeforeEach
     void setUp() {
-        GameConfig.resetForTest();
+        GameConfig.resetForTests();
         RandomSource.resetForTest();
         factory = new MonsterFactory();
     }
