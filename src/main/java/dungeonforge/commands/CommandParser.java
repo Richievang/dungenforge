@@ -76,6 +76,8 @@ public class CommandParser {
         register("look", (GameContext c, String a) -> new SimpleCommand("look",
                 () -> c.getBus().message(describeRoom(c))));
 
+        register("loot",  (c, a) -> makeLootMacross(c));
+
         register("inventory", (GameContext c, String a) -> new SimpleCommand("inventory", () -> {
             if (c.getPlayer().getInventory().isEmpty()) {
                 c.getBus().message("You are not carry anything");
@@ -110,6 +112,22 @@ public class CommandParser {
         }));
         alias("exit", "quit");
 
+    }
+
+    public Command makeLootMacross(GameContext ctx) {
+        Room room = ctx.getCurrentRoom();
+        List<Item> targets = new ArrayList<>(room.getFloorItems());
+        if(room.getChest()  != null && !room.getChest().getContents().isEmpty()) targets.addAll(room.getChest().getContents());
+
+        if ( targets.isEmpty()) {
+            return new NoCommand(ctx.getBus(), "There is nothing here to grab");
+        }
+
+        List<Command> children = new ArrayList<>();
+        for (Item item : targets) {
+            children.add(new TakeCommand(ctx, item.getName()));
+        }
+        return new MacroCommand("loots" + children.size(), children);
     }
 
     public String describeRoom(GameContext ctx) {

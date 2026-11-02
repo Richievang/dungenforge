@@ -104,19 +104,52 @@ why in one sentence.)*
 
 ## 4. AFTER — US-5.3 and US-5.4
 
+You have to replay backwards because if you undid the children forward then you'd end up only going
+back in history 1 command.
+
 **Paste a `loot` that picks up three things, then an `undo` that puts them all back:**
 
 ```
+look
+[HP 76/80] > 
+  [L1R1Level1: Crypt
+    Iron-bound Chest: 
+    - Bone Dagger [dmg 6] (1.0kg, 50g)
+    - Bone Dagger [dmg 6] (1.0kg, 50g)
+    - Crypt Guard Armor [def 3] (4.0kg, 43g)
+   Exits: south,north
+
+loot
+[HP 76/80] > 
+   You take Bone Dagger.
+   You take Bone Dagger.
+   You take Crypt Guard Armor.
 
 ```
 
 **Paste the hourglass rewinding a turn, with `inventory` before and after:**
 
 ```
+inventory
+[HP 76/80] > 
+  You are carrying:
+      - Small Healing Draught [heals 22] (0.3kg, 20g)
+      - Chronomaster's Hourglass[2charges] (rewinds one turn)
+      - Bone Dagger [dmg 6] (1.0kg, 50g)
+      - Bone Dagger [dmg 6] (1.0kg, 50g)
+      - Crypt Guard Armor [def 3] (4.0kg, 43g)
 
+use Chronomaster's Hourglass
+[HP 76/80] > 
+  Sand runs backwards. The last moment unhappens.
+  ... but there was nothing to take back.
+
+inventory
+[HP 76/80] > 
+  You are not carry anything
 ```
 
-**How long did US-5.4 actually take you?** ____ minutes
+**How long did US-5.4 actually take you?** __21__ minutes
 
 ## 5. The replay
 
