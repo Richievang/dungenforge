@@ -156,7 +156,62 @@ inventory
 **Paste your `history` output and the first ten lines of replaying it with `--script=`:**
 
 ```
+  Type help for what you can do. You are carrying an hourglass -- use hourglass' rewinds one of your turns.
+  [L1R0Level1: Crypt
+   Exits: north
 
+[HP 80/80] > north
+
+  You gonorth.
+  Ghost Ghostloose a shot for 2
+
+[HP 78/80] > north
+
+  You cannot walk away with enemies still standing
+
+[HP 78/80] > attack
+
+  You hit Ghost for 10
+  Ghost Ghostloose a shot for 2
+
+[HP 76/80] > attack
+
+  You hit Ghost for 10
+  ACHIEVEMENT: First Blood -- Defeat your first monster
+  Ghost dies.12
+
+[HP 76/80] > look
+
+  [L1R1Level1: Crypt
+    Iron-bound Chest: 
+    - Bone Dagger [dmg 6] (1.0kg, 50g)
+    - Bone Dagger [dmg 6] (1.0kg, 50g)
+    - Crypt Guard Armor [def 3] (4.0kg, 43g)
+   Exits: south,north
+
+[HP 76/80] > loot
+
+   You take Bone Dagger.
+   You take Bone Dagger.
+   You take Crypt Guard Armor.
+
+[HP 76/80] > loot
+
+  There is nothing here to grab
+
+[HP 76/80] > north
+
+  You gonorth.
+
+[HP 80/80] > quit
+
+  You lay down your pack
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  09:44 min
+[INFO] Finished at: 2026-11-01T23:58:30-08:00
+[INFO] ------------------------------------------------------------------------
 ```
 
 ## 6. Tests and CI
@@ -164,7 +219,53 @@ inventory
 **`mvn test` summary:**
 
 ```
-
+PS C:\Users\richi\IdeaProjects\dungenforge> mvn test
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< edu.redwoods.cis18:dungeonforge >-------------------
+[INFO] Building DungeonForge 0.7.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ dungeonforge ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ dungeonforge ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ dungeonforge ---
+[INFO] skip non existing resourceDirectory C:\Users\richi\IdeaProjects\dungenforge\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ dungeonforge ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ dungeonforge ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running dungeonforge.CommandTest
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s -- in dungeonforge.CommandTest
+[INFO] Running dungeonforge.FactoryTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in dungeonforge.FactoryTest
+[INFO] Running dungeonforge.SingletonTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in dungeonforge.SingletonTest
+[INFO] Running dungeonforge.SkeletonTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in dungeonforge.SkeletonTest
+[INFO] Running dungeonforge.StrategyObserverTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in dungeonforge.StrategyObserverTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 64, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.582 s
+[INFO] Finished at: 2026-11-01T23:59:30-08:00
+[INFO] ------------------------------------------------------------------------
 ```
 
 **Green CI URL:**
