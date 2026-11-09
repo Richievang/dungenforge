@@ -10,13 +10,33 @@ grep -rn "hasLivingMonsters" src/main/java/dungeonforge/commands/
 
 **Paste it. How many command classes re-implement the same check?**
 
-```
-
+```bash
+grep -rn "hasLivingMonsters" src/main/java/dungeonforge/commands/
+src/main/java/dungeonforge/commands/CommandParser.java:172:        if (room.hasLivingMonsters()) {
+src/main/java/dungeonforge/commands/DropCommand.java:21:        if (room().hasLivingMonsters()) {
+src/main/java/dungeonforge/commands/MoveCommand.java:19:        if (room().hasLivingMonsters()) {
+src/main/java/dungeonforge/commands/TakeCommand.java:13:        if (room().hasLivingMonsters()) {
 ```
 
 **Play a turn: start a fight, then type `north`. Paste what happens:**
 
-```
+```bash
+north
+[HP 80/80] > 
+  You go north.
+  ACHIEVEMENT: Cornered -- Force an enemy to change tactics
+  Ghost changes tactics: idle -> hunting.
+  Ghost hits you for 2.
+
+hit
+[HP 78/80] > 
+  You hit Ghost for 10.
+  Ghost changes tactics: hunting -> enraged.
+  Ghost hits you for 3.
+
+north
+[HP 75/80] > 
+  You cannot walk away with enemies still standing.
 
 ```
 
