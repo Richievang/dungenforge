@@ -4,19 +4,20 @@ import dungeonforge.core.Combat;
 import dungeonforge.core.Room;
 import dungeonforge.events.GameEvent;
 
+/** WEEK 7 -- COMMAND. */
 public class MoveCommand extends AbstractCommand {
 
     private final String direction;
 
     public MoveCommand(GameContext ctx, String direction) {
         super(ctx, direction);
-        this.direction = direction;
+        this.direction = direction.toLowerCase();
     }
 
     @Override
     protected boolean doExecute() {
         if (room().hasLivingMonsters()) {
-            bus().message("You cannot walk away with enemies still standing");
+            bus().message("You cannot walk away with enemies still standing.");
             return false;
         }
         Room next = room().getExit(direction);
@@ -26,10 +27,9 @@ public class MoveCommand extends AbstractCommand {
         }
         ctx.setCurrentRoom(next);
         Combat.restAfterRoom(player());
-        bus().publish(GameEvent.message("You go" + direction + "."));
+        bus().publish(GameEvent.message("You go " + direction + "."));
         return true;
     }
 
-    @Override
-    public String getDescription() { return direction; }
+    @Override public String getDescription() { return direction; }
 }
