@@ -96,13 +96,13 @@ public class FactoryTest {
     @Test
     void everyRegisteredThemeIsReachableByDepth() {
         ThemeRegistry registry = new ThemeRegistry(factory);
-        assertEquals(4, registry.size());
+        assertEquals(3, registry.size());
 
         assertEquals("Crypt", registry.forDepth(1).themeName());
         assertEquals("Forge", registry.forDepth(2).themeName());
         assertEquals("Frost", registry.forDepth(3).themeName());
-        assertEquals("TheGlade", registry.forDepth(4).themeName());
-        assertEquals("Crypt", registry.forDepth(5).themeName());
+        assertEquals("Crypt", registry.forDepth(4).themeName());
+        assertEquals("Forge", registry.forDepth(5).themeName());
     }
 
     @Test

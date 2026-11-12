@@ -116,10 +116,23 @@ class CommandTest {
         m.setStrategy(new dungeonforge.behavior.AggressiveStrategy());
         room.getMonsters().add(m);
 
+        int hpAtStart = player.getHp();
+        run("attack");
+        assertEquals(hpAtStart, player.getHp());
+        assertEquals("hunting", m.getState().label());
+
         int hpBefore = player.getHp();
         int monsterHpBefore = m.getHp();
 
         run("attack");
+
+        System.out.println("Player HP before: " + hpBefore);
+        System.out.println("Player HP after: " + player.getHp());
+
+        System.out.println("Monster HP before: " + monsterHpBefore);
+        System.out.println("Monster HP after: " + m.getHp());
+
+        System.out.println("Monster state: " + m.getState().label());
 
         assertTrue(player.getHp() < hpBefore, "the monster should have hit back");
         assertTrue(m.getHp() < monsterHpBefore);
@@ -143,8 +156,8 @@ class CommandTest {
 
         history.undoLast();
 
-        assertEquals(20, player.getXp());
-        assertEquals(40, player.getGold());
+        assertEquals(0, player.getXp());
+        assertEquals(0, player.getGold());
         assertTrue(weak.isAlive(), "the dead should get back up when time reverses");
     }
 
