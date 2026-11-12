@@ -36,10 +36,6 @@ public final class RandomSource {
         return instance;
     }
 
-    public static void resetForTest() {
-
-    }
-
     public int nextInt(int bound)      { return bound <= 0 ? 0 : rng.nextInt(bound); }
     public int between(int lo, int hi) { return hi <= lo ? lo : lo + rng.nextInt(hi - lo + 1); }
     public double nextDouble()         { return rng.nextDouble(); }

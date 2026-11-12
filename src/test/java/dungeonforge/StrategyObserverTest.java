@@ -146,7 +146,7 @@ class StrategyObserverTest {
             if (m.isAlive()) combat.monsterTurns(p, room);
         }
 
-        assertTrue(seen.stream().anyMatch(e -> e.getType() == EventType.STRATEGY_CHANGE),
+        assertTrue(seen.stream().anyMatch(e -> e.getType() == EventType.STRATEGY_CHANGED),
                 "a monster driven below the flee threshold should change tactics");
     }
 
