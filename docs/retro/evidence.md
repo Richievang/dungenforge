@@ -53,7 +53,7 @@ grep -n "getStateName" src/main/java/dungeonforge/core/Combat.java
 **Paste it. Which three methods branch on the state name?**
 
 ```
-
+CombatState, ExploringState, and the GameState
 ```
 
 **Answer before you refactor:**
@@ -70,14 +70,24 @@ grep -n "getStateName" src/main/java/dungeonforge/core/Combat.java
 
 **Paste `help` in Exploring and in Combat, side by side:**
 
-```
+```bash
+Combat: [dungeonforge.states.CombatState@1b7bca6e | HP 80/80] > help
 
+  [Combat] you can : attack, look, use, inventory, status, history, undo, help, quit
+  
+Exploring: [dungeonforge.states.ExploringState@65fabf75 | HP 78/80] > help
+
+  [Exploring] you can : north, south, down, look, loot, drop, use, 
+    inventory, pack, status, quest, history, undo, help, quit
 ```
 
 **Paste an attempt to move during combat:**
 
-```
+```bash
+[dungeonforge.states.CombatState@1b7bca6e | HP 80/80] > north
 
+  You cannot do that in Combat mode. 
+    Available here: attack, look, use, inventory, status, history, undo, help, quit
 ```
 
 **Paste the grep proving the guards are gone:**

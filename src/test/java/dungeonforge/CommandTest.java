@@ -116,11 +116,17 @@ class CommandTest {
         m.setStrategy(new dungeonforge.behavior.AggressiveStrategy());
         room.getMonsters().add(m);
 
+        ctx.syncState();
+
         int hpAtStart = player.getHp();
         run("attack");
-        assertEquals(hpAtStart, player.getHp());
-        assertEquals("hunting", m.getState().label());
+        assertEquals(hpAtStart, player.getHp(),
+                "an idle monster must not retaliate -- the first blow is free");
+        assertEquals("hunting", m.getState().label(),
+                "... but it notices you on the way out of that turn. If this says 'idle', the "
+                                + "attack never ran at all -- look at the mode, not at the state machine.");
 
+        // Turn 2 -- now there is a real exchange, so there is a counter-attack to undo
         int hpBefore = player.getHp();
         int monsterHpBefore = m.getHp();
 
@@ -149,8 +155,15 @@ class CommandTest {
         Monster weak = new Monster("Fragile", 5, 1, 20);
         weak.setStrategy(new dungeonforge.behavior.AggressiveStrategy());
         room.getMonsters().add(weak);
+        ctx.syncState();
 
-        run("attack");
+        Command attack = parser.parse("attack", ctx);
+        attack.execute();
+        history.push(attack);
+
+        System.out.println("Did run: " +
+                (attack instanceof AbstractCommand a && a.didRun()));
+
         assertTrue(player.getXp() > 0);
         assertTrue(player.getGold() > 0);
 
