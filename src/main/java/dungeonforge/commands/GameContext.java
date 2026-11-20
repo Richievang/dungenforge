@@ -5,6 +5,9 @@ import dungeonforge.core.GameWorld;
 import dungeonforge.core.Player;
 import dungeonforge.core.Room;
 import dungeonforge.events.EventBus;
+import dungeonforge.states.*;
+
+import java.util.List;
 
 /**
  * WEEK 7 -- the RECEIVER, bundled.
@@ -25,6 +28,7 @@ public class GameContext {
 
     private Room currentRoom;
     private boolean running = true;
+    private GameState state = new ExploringState();
 
     public GameContext(GameWorld world, Player player, EventBus bus,
                        Combat combat, CommandHistory history) {
@@ -36,6 +40,26 @@ public class GameContext {
         this.currentRoom = world.startingRoom();
     }
 
+    public void transitionsTo(GameState next) {
+        if (next == null || next.getClass() == state.getClass()) return;
+        state.onExit(this);
+        state = next;
+        next.onEnter(this);
+    }
+
+    public void syncState() {
+        if (!player.isAlive() || !running) {
+            transitionsTo(new GameOverState());
+            return;
+        }
+        if (state instanceof InventoryState) return;
+
+        if (currentRoom.hasLivingMonsters()) transitionsTo(new CombatState());
+        else transitionsTo(new ExploringState());
+    }
+
+    public List<String> allowedVerbs() { return state.availableCommand(); }
+
     public GameWorld getWorld()          { return world; }
     public Player getPlayer()            { return player; }
     public EventBus getBus()             { return bus; }
@@ -45,6 +69,10 @@ public class GameContext {
     public void setCurrentRoom(Room r)   { this.currentRoom = r; }
     public boolean isRunning()           { return running; }
     public void stop()                   { this.running = false; }
+    public GameState getState() { return state; }
+
+    public void openPack() {transitionsTo(new InventoryState());}
+    public void closePack() {transitionsTo(new ExploringState());}
 
     /** After a turn-ending command, the monsters get their round. */
     public void runMonsterTurns() {
