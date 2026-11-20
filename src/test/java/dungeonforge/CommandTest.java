@@ -47,6 +47,24 @@ class CommandTest {
         history.push(c);
     }
 
+    /**
+     * Puts a hostile monster in the current room THE WAY WALKING IN WOULD: in the room's list,
+     * and with the game told that a fight has started.
+     *
+     * `room.getMonsters().add(m)` on its own is a half-finished operation in a test. In real
+     * play you arrive through MoveCommand, which calls ctx.syncState() for you; a test that
+     * injects a monster directly has to finish the job itself. That one missing line is the
+     * single most expensive thing in this file, so it lives here now instead of in everybody's
+     * memory.
+     */
+    private Monster spawnHostile(String name, int maxHp, int attack, int xpReward) {
+        Monster m = new Monster(name, maxHp, attack, xpReward);
+        m.setStrategy(new dungeonforge.behavior.AggressiveStrategy());
+        ctx.getCurrentRoom().getMonsters().add(m);
+        ctx.syncState();
+        return m;
+    }
+
     // ---------- US-5.1: every action is an object ----------
 
     @Test
@@ -111,34 +129,20 @@ class CommandTest {
      */
     @Test
     void undoingAnAttackAlsoReversesTheCounterAttack() {
-        Room room = ctx.getCurrentRoom();
-        Monster m = new Monster("Test Dummy", 40, 6, 9);
-        m.setStrategy(new dungeonforge.behavior.AggressiveStrategy());
-        room.getMonsters().add(m);
-
-        ctx.syncState();
-
+        Monster m = spawnHostile("Test Dummy", 40, 6, 9);
         int hpAtStart = player.getHp();
         run("attack");
         assertEquals(hpAtStart, player.getHp(),
                 "an idle monster must not retaliate -- the first blow is free");
         assertEquals("hunting", m.getState().label(),
-                "... but it notices you on the way out of that turn. If this says 'idle', the "
-                                + "attack never ran at all -- look at the mode, not at the state machine.");
+                "...but it notices you on the way out of that turn. If this says 'idle', the "
+                        + "attack never ran at all -- look at the mode, not at the state machine.");
 
-        // Turn 2 -- now there is a real exchange, so there is a counter-attack to undo
+        // Turn 2 -- now there is a real exchange, so there is a counter-attack to undo.
         int hpBefore = player.getHp();
         int monsterHpBefore = m.getHp();
 
         run("attack");
-
-        System.out.println("Player HP before: " + hpBefore);
-        System.out.println("Player HP after: " + player.getHp());
-
-        System.out.println("Monster HP before: " + monsterHpBefore);
-        System.out.println("Monster HP after: " + m.getHp());
-
-        System.out.println("Monster state: " + m.getState().label());
 
         assertTrue(player.getHp() < hpBefore, "the monster should have hit back");
         assertTrue(m.getHp() < monsterHpBefore);
@@ -149,21 +153,12 @@ class CommandTest {
         assertEquals(monsterHpBefore, m.getHp());
     }
 
+
     @Test
     void undoRestoresXpAndGoldFromAKill() {
-        Room room = ctx.getCurrentRoom();
-        Monster weak = new Monster("Fragile", 5, 1, 20);
-        weak.setStrategy(new dungeonforge.behavior.AggressiveStrategy());
-        room.getMonsters().add(weak);
-        ctx.syncState();
+        Monster weak = spawnHostile("Fragile", 5, 1, 20);
 
-        Command attack = parser.parse("attack", ctx);
-        attack.execute();
-        history.push(attack);
-
-        System.out.println("Did run: " +
-                (attack instanceof AbstractCommand a && a.didRun()));
-
+        run("attack");
         assertTrue(player.getXp() > 0);
         assertTrue(player.getGold() > 0);
 
@@ -172,12 +167,13 @@ class CommandTest {
         assertEquals(0, player.getXp());
         assertEquals(0, player.getGold());
         assertTrue(weak.isAlive(), "the dead should get back up when time reverses");
+
+        assertEquals("idle", weak.getState().label(),
+                "undo must put the monster's STATE back, not just its hit points");
     }
 
     @Test
-    void undoOnAnEmptyStackReportsFailureRatherThanThrowing() {
-        assertFalse(history.undoLast());
-    }
+    void undoOnAnEmptyStackReportsFailureRatherThanThrowing() { assertFalse(history.undoLast()); }
 
     @Test
     void theUndoStackIsBoundedButTheReplayLogIsNot() {
@@ -293,7 +289,5 @@ class CommandTest {
         return null;
     }
 
-    private void assumeRoom(Room r) {
-        assertNotNull(r, "the seeded world should contain at least one stocked chest");
-    }
+    private void assumeRoom(Room r) { assertNotNull(r, "the seeded world should contain at least one stocked chest"); }
 }
